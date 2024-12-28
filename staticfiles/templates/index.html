@@ -1,0 +1,251 @@
+	{% extends "master.html" %}
+
+	{% block content %}
+
+	<section id="slider" xmlns="http://www.w3.org/1999/html"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+
+
+						<div class="carousel-inner">
+
+
+							<div class="item active">
+
+								<div class="col-sm-6">
+									<h1><span>E</span>-SHOPPER</h1>
+									<h2>Free E-Commerce Template</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+
+								</div>
+								<div class="col-sm-6">
+									<img src="/static/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+
+								</div>
+
+							</div>
+							{% for i in slider %}
+							<div class="item ">
+								<div class="col-sm-6">
+									<h1><span>{{i.title}}</span></h1>
+									<h2>{{i.hading}}</h2>
+									<p>{{i.des}} </p>
+
+								</div>
+								<div class="col-sm-6">
+									<img src="{{ i.image}}" class="girl img-responsive" alt="" />
+								</div>
+							</div>
+							{% endfor %}
+
+						</div>
+
+
+						</div>
+
+
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Category</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+							{% for i in category %}
+							<div class="panel panel-default">
+
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#{{i.id}}">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											{{i.name}}
+										</a>
+									</h4>
+								</div>
+								<div id="{{i.id}}" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											{% for n in i.sub_category_set.all %}
+											<li><a href="/?category={{n.id}}">{{n.name}} </a></li>
+											{% endfor %}
+
+										</ul>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+
+
+						</div><!--/category-products-->
+					
+						<div class="brands_products"><!--brands_products-->
+							<h2>Brands</h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked">
+									{% for i in brand %}
+									<li><a href="/?brand={{i.id}}"> <span class="pull-right">(50)</span>{{i.name}}</a></li>
+
+									{% endfor %}
+
+								</ul>
+							</div>
+						</div><!--/brands_products-->
+						
+
+						
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{{i.image}}" alt="" />
+						</div><!--/shipping-->
+					
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Features Items</h2>
+						{% for i in product %}
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+										<div class="productinfo text-center">
+											<img src="{{i.image}}" height="249" width="268" alt="" />
+											<h2>Rs.{{i.price}}</h2>
+											<p>{{i.name}}</p>
+											<a href="{% url 'cart_add' i.id %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>{{i.datetime}}</a>
+										</div>
+										<div class="product-overlay">
+											<div class="overlay-content">
+												<h2>Rs.{{i.price}}</h2>
+												<p>{{i.name}}</p>
+												<a href="{% url 'cart_add' i.id %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+										</div>
+								</div>
+
+							</div>
+
+						</div>
+
+                      {% endfor %}
+					</div><!--features_items-->
+
+
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
+								<li><a href="#blazers" data-toggle="tab">Blazers</a></li>
+								<li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
+								<li><a href="#kids" data-toggle="tab">Kids</a></li>
+								<li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
+							</ul>
+						</div>
+
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="tshirt" >
+
+								{% for i in items %}
+								<div class="col-sm-3">
+
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+
+												<img src="{{i.img}}" alt="" />
+												<h2>Rs.{{i.price}}</h2>
+												<p>{{i.name}}</p>
+												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>{{i.date}}</a>
+											</div>
+											
+										</div>
+									</div>
+
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+
+					</div><!--/category-tab-->
+					
+
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">recommended items</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">
+									{% for i in recommeditems %}
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="{{i.img}}" alt="" />
+													<h2>Rs.{{i.price}}</h2>
+													<p>{{i.name}}</p>
+													<a href="{% url 'cart_add' i.id %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+
+									{% endfor %}
+								</div>
+								<div class="item">
+									{% for i in recommeditems %}
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="{{i.img}}" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="{% url 'cart_add' i.id %} " class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+
+
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>			
+						</div>
+					</div><!--/recommended_items-->
+					
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	{% endblock %}
+	
